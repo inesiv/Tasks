@@ -1,52 +1,50 @@
-const form = document.querySelector('form')
-form.addEventListener('submit', addTask)
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-const taskList = document.querySelector('ul')
-taskList.addEventListener('click', delTask)
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>tasks</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Task list project</span>
 
-const deleteBtn = document.querySelector('#delete-tasks')
-deleteBtn.addEventListener('click', delTasks)
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="Add task" id="task" type="text" class="validate">
+                                    <label for="task"></label>
+                                    <input type="submit" value="Add Task" class="btn green">
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                <div class="card-action">
+                    <h4>Tasks</h4>
+                    <ul class="collection">
+                    </ul>
+                    <a href="#" class="btn red" id="delete-tasks">Delete all tasks</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-function delTasks(){
-    // taskList.innerHTML = ''
-    while(taskList.firstChild){
-        taskList.removeChild(taskList.firstChild)
-    }
-}
-
-function delTask(event){
-    if(event.target.textContent === 'X'){
-        if(confirm('Do you really want to delete this task?')){
-            event.target.parentElement.remove()
-        }
-    }
-}
-
-function addTask(event){
-    const task = document.querySelector('#task').value
-    const taskList = document.querySelector('ul');
-    const li = document.createElement('li')
-    li.className = 'collection-item'
-    const text = document.createTextNode(task)
-    li.appendChild(text)
-    const link = document.createElement( 'a')
-    link.className = 'secondary-content'
-    link.appendChild(document.createTextNode('X'))
-    link.setAttribute('href', '#')
-    li.appendChild(link)
-    taskList.appendChild(li)
-    taskStorage(task)
-    document.querySelector('#task').value = ''
-    event.preventDefault()
-}
-function taskStorage(task){
-    let tasks
-    if(localStorage.getItem('tasks') === null){
-        tasks = []
-    } else {
-        tasks = JSON.parse(localStorage.getItem('tasks'))
-    }
-    tasks.push(task)
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-
-}
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- application script -->
+<script src="app.js"></script>
+</body>
+</html>
